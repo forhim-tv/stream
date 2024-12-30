@@ -12,23 +12,26 @@
     <meta property="og:url" content="YOUR_PAGE_URL">
     <title>ForHim TV: Beauties and beats</title>
     <style>
-        body {
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: #000000;
-            flex-direction: column;
             color: #ffffff;
             font-family: Arial, sans-serif;
             text-align: center;
+            overflow: hidden; /* Éviter tout débordement */
         }
         iframe {
-            border: 2px solid #147ae3;
-            width: 90vw; /* Largeur de l'iframe avec 90% de la largeur de l'écran */
-            max-width: 1280px; /* Limiter la largeur à 1280px */
-            margin-top: 20px;
+            width: 100vw; /* Prend toute la largeur de l'écran */
+            height: 100vh; /* Prend toute la hauteur de l'écran */
+            border: 0;
         }
         a {
             margin-top: 20px;
@@ -59,14 +62,13 @@
 <body>
     <h1>ForHim TV: Beauties and beats</h1>
 
+    <!-- Iframe ajustée pour prendre toute la largeur et hauteur de l'écran -->
     <iframe 
         src="https://player.kick.com/forhim-tv" 
-     height="720" 
-     width="1280"
-     frameborder="0" 
-     scrolling="no" 
-     allowfullscreen="true"> 
-</iframe>
+        frameborder="0" 
+        scrolling="no" 
+        allowfullscreen="true">
+    </iframe>
 
     <a href="https://fr.tipeee.com/forhimtv" target="_blank">
         If you’d like to support us, you can Subscribe to our Tipeee page
