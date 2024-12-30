@@ -21,23 +21,30 @@
             background-color: #000000;
             flex-direction: column;
             color: #ffffff;
-            font-family: Arial, sans-serif; /* Application de la police Arial */
+            font-family: Arial, sans-serif;
             text-align: center;
         }
-
+        iframe {
+            border: 2px solid #147ae3;
+            width: 90vw; /* Largeur de l'iframe avec 90% de la largeur de l'écran */
+            max-width: 1280px; /* Limiter la largeur à 1280px */
+            height: 50vh; /* Hauteur de l'iframe avec 50% de la hauteur de l'écran */
+            max-height: 720px; /* Limiter la hauteur à 720px */
+            margin-top: 20px;
+        }
         a {
             margin-top: 20px;
             text-decoration: none;
             font-size: 18px;
             color: #147ae3;
-            font-family: Arial, sans-serif; /* Application de la police Arial aux liens */
+            font-family: Arial, sans-serif;
         }
         a:hover {
             color: #290a59;
         }
         .message {
             margin-top: 30px;
-            color: #ffffff; /* Texte en blanc */
+            color: #ffffff;
         }
         .message p {
             font-size: 16px;
@@ -56,8 +63,6 @@
 
     <iframe 
         src="https://player.kick.com/forhim-tv" 
-        height="1090" 
-        width="1280"
         frameborder="0" 
         scrolling="no" 
         allowfullscreen="true">
