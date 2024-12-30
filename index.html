@@ -19,6 +19,7 @@
         }
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -26,12 +27,16 @@
             color: #ffffff;
             font-family: Arial, sans-serif;
             text-align: center;
-            overflow: hidden; /* Éviter tout débordement */
+            overflow: hidden;
+        }
+        h1 {
+            margin-bottom: 20px; /* Ajout d'un espace sous le titre */
         }
         iframe {
             width: 100vw; /* Prend toute la largeur de l'écran */
-            height: 100vh; /* Prend toute la hauteur de l'écran */
+            height: 70vh; /* Prend 70% de la hauteur de l'écran */
             border: 0;
+            margin-bottom: 30px; /* Ajout d'un espace en bas de l'iframe */
         }
         a {
             margin-top: 20px;
@@ -70,6 +75,7 @@
         allowfullscreen="true">
     </iframe>
 
+    <!-- Texte en dessous de l'iframe -->
     <a href="https://fr.tipeee.com/forhimtv" target="_blank">
         If you’d like to support us, you can Subscribe to our Tipeee page
     </a>
