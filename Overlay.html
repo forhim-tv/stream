@@ -2,32 +2,70 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Overlay avec Widget Kickbot</title>
+  <title>Scraping Kick.com pour les Followers</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: transparent;
-      overflow: hidden;
-      height: 100%;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
     }
-    .widget-container {
-      width: 100%;
-      height: 100%;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+    #follower-count {
+      font-size: 2rem;
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
-  <div class="widget-container">
-    <iframe src="https://widgets.kickbot.com/external/widget/02f0937f-ead7-4841-a2c9-73aa16cee2f6" 
-            allowtransparency="true" 
-            scrolling="no">
-    </iframe>
-  </div>
+  <h1>Nombre de Followers sur Kick</h1>
+  <div id="follower-count">Chargement...</div>
+
+  <script>
+    async function scrapeFollowers() {
+      // URL de la page Kick de la chaîne
+      const channelUrl = 'https://kick.com/forhim-tv';
+      // Utilisation d'un proxy pour contourner les restrictions CORS
+      const proxyUrl = 'https://api.allorigins.hexocode.repl.co/get?disableCache=true&url=' + encodeURIComponent(channelUrl);
+
+      try {
+        const response = await fetch(proxyUrl);
+        if (!response.ok) {
+          throw new Error('Erreur lors du chargement: ' + response.status);
+        }
+        // AllOrigins renvoie un JSON avec une propriété "contents" contenant le HTML
+        const data = await response.json();
+        const htmlContent = data.contents;
+
+        // Utilisation de DOMParser pour analyser le HTML récupéré
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, 'text/html');
+
+        // Méthode 1 : essayer de cibler un élément spécifique (à adapter selon la structure réelle)
+        // Par exemple, si un élément contient directement le nombre de followers, on peut utiliser :
+        // const el = doc.querySelector('.followers-count');
+        // let followerCount = el ? el.textContent.trim() : null;
+
+        // Méthode 2 : utiliser une expression régulière sur l'ensemble du texte de la page
+        const fullText = doc.body.innerText;
+        // On recherche une suite de chiffres éventuellement séparée par des virgules ou points suivi du mot "followers" (insensible à la casse)
+        const regex = /([\d,.]+)\s*followers/i;
+        const match = fullText.match(regex);
+        let followerCount = 0;
+        if (match && match[1]) {
+          // On retire les virgules et points et on convertit en entier
+          followerCount = parseInt(match[1].replace(/[,.]/g, ''), 10);
+        }
+
+        document.getElementById('follower-count').textContent = 'Followers: ' + followerCount;
+      } catch (error) {
+        console.error('Erreur lors du scraping :', error);
+        document.getElementById('follower-count').textContent = 'Erreur lors de la récupération des followers';
+      }
+    }
+
+    // Lancer la fonction au chargement de la page
+    scrapeFollowers();
+  </script>
 </body>
 </html>
